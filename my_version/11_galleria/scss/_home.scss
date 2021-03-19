@@ -1,0 +1,68 @@
+@use "variaveis" as v;
+@use "mixins" as m;
+
+.gallery {
+    @include m.flex-center(row);
+    @include m.container;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+
+    @include m.respond-to(small) {
+        flex-direction: column;
+    }
+
+    .card {
+        width: 31%;
+        height: 400px;
+        margin-bottom: 4%;
+        @include m.flex-center(column);
+        color: v.$clr-primary;
+
+        @include m.respond-to(small) {
+            width: 90%;
+            margin-bottom: 6%;
+        }
+
+        &__title {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        &__btn {
+            padding: 0.6rem;
+            border: 2px solid v.$clr-primary;
+            color: v.$clr-primary;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+
+            &:hover,
+            &:focus {
+                background-color: v.$clr-primary;
+                color: v.$clr-bg;
+            }
+        }
+    }
+
+    // Lista com os números do Id's dos cards e as imagens
+    $imagens: (
+        "1": "animais.jpg",
+        "2": "arquitetura.jpg",
+        "3": "cidade.jpg",
+        "4": "decoracao.jpg",
+        "5": "esportes.jpg",
+        "6": "natureza.jpg",
+        "7": "paisagem.jpg",
+        "8": "pessoas.jpg",
+        "9": "refeicoes.jpg",
+    );
+    // Gera os cards pelo ID numerado
+    @each $numero, $imagem in $imagens {
+        #card-#{$numero} {
+            // Mixin com a formatação da imagem
+            @include m.bg-img($imagem);
+        }
+    }
+}

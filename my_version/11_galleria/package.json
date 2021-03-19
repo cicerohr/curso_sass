@@ -1,0 +1,11 @@
+{
+  "name": "galeria_fotos",
+  "version": "1.0.0",
+  "description": "Galeria de fotos para o projeto de aprendizagem Sass",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cícero",
+  "license": "MIT"
+}

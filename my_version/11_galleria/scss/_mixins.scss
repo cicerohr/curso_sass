@@ -1,0 +1,81 @@
+@use "variaveis" as v;
+
+/// Centraliza os containeres e limita a largura
+/// @author Cícero
+@mixin container {
+    max-width: v.$container-width;
+    padding: 1.5rem 0;
+    margin: 0 auto;
+}
+
+/// Centraliza o flexbox na horizontal ou vertical
+/// @author Cícero
+/// @param {String} $direction
+@mixin flex-center($direction) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction;
+}
+
+/// Formata imagens para a galeria
+/// @author Cícero
+/// @param {String} $img
+@mixin bg-img($img) {
+    background-image: url("../img/#{$img}");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: grayscale(100%);
+    transition: 0.6s;
+
+    &:hover {
+        background-size: 110%;
+        filter: grayscale(0%);
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/#{$img}");
+    }
+}
+
+// Lista com os breakpoints
+$breakpoints: (
+    "small": (
+        max-width: 425px,
+    ),
+    "medium": (
+        max-width: 992px,
+    ),
+    "large": (
+        max-width: 1200px,
+    ),
+);
+// $breakpoints: (
+//     "small": (
+//         min-width: 767px,
+//     ),
+//     "medium": (
+//         min-width: 992px,
+//     ),
+//     "large": (
+//         min-width: 1200px,
+//     ),
+// );
+
+/// Breakpoints
+/// @author Kitty Giraudel
+/// @param {String} $name
+/// @link https://www.sitepoint.com/managing-responsive-breakpoints-sass/ Managing Responsive Breakpoints with Sass
+@mixin respond-to($name) {
+    // If the key exists in the map
+    @if map-has-key($breakpoints, $name) {
+        // Prints a media query based on the value
+        @media #{inspect(map-get($breakpoints, $name))} {
+            @content;
+        }
+    }
+
+    // If the key doesn't exist in the map
+    @else {
+        @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+    }
+}

@@ -1,0 +1,63 @@
+@use "variaveis" as v;
+@use "mixins" as m;
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    @include m.container;
+
+    @include m.respond-to(small) {
+        padding: 1.1rem;
+    }
+
+    &__brand {
+        color: v.$clr-primary;
+        font-size: 3rem;
+    }
+
+    &__nav {
+        ul {
+            @include m.flex-center(row);
+            height: 100%;
+
+            @include m.respond-to(small) {
+                display: none;
+            }
+        }
+
+        li {
+            margin: 0 1rem;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .active {
+            color: v.$clr-secundary;
+        }
+
+        a:hover,
+        a:focus {
+            color: v.$clr-secundary;
+        }
+    }
+
+    &__social-media {
+        ul {
+            @include m.flex-center(row);
+            height: 100%;
+
+            @include m.respond-to(small) {
+                display: none;
+            }
+        }
+
+        li {
+            margin: 0 1rem;
+        }
+
+        a:hover,
+        a:focus {
+            color: v.$clr-primary;
+        }
+    }
+}
